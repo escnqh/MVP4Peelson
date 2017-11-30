@@ -1,14 +1,17 @@
 # MVP4Peelson
-####一个自用解决内存泄漏问题的MVP模式框架  
+### 一个自用解决内存泄漏问题的MVP模式框架  
 - - -
 ### 索引
--[Why](#Why)
--[How](#How)
--[参考书目](#参考)
+-[Why](#Why)  
+
+-[How](#How)  
+
+-[参考书目](#参考)  
+
 - - - 
 <span id="Why">
 
-###Why
+### Why
 `MVP`模式广泛运用于Android项目开发实战之中，具有易于维护、易于测试、松耦合、复用性高等特点，但是当`Presenter`进行一些耗时操作时，由于其持有了`View`的强引用，如果在耗时操作之前此`View`层被销毁会导致`Presenter`一直持有`View`对象而`View`对象无法收回，此时就发生了内存泄漏。  
 
 而通常的解决办法是通过自己实现一个`ActivityCollector`来解决：
@@ -59,7 +62,7 @@ public class BaseActivity extends AppCompatActivity {
 
 <span id="How">
 
-###How
+### How
 现在有一个全新的思路来解决这一问题。就是通过弱引用和`Activity`、`Fragment`的声明周期来解决这个问题。  
 
 首先建立一个`Presenter`抽象，命名为`BasePresenter`，它是一个泛型类，泛型类型为`View`角色需要实现的接口类型：
@@ -178,6 +181,6 @@ public class PhotoInListFragment extends BaseFragment<PhotoInfoContract.View<Pho
 如有问题请在Issues中提出，或者与我联系。
 <span id="参考">
 
-###参考
+### 参考
 
 《Android源码设计模式 实战与解析（第2版）》
