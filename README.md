@@ -121,7 +121,7 @@ public abstract class BaseActivity<V, P extends BasePresenter<V>> extends Activi
     protected abstract P createPresenter();
 }
 ```
-BaseActivity含有两个泛型参数，第一个是View接口类型，第二个是Presenter的具体类型。通过泛型参数，会使得一些通用的逻辑可以被抽象到BaseActivity类中。例如，在BaseActivity的onCreate函数中，会通过createPresenter函数创建一个具体的Presenter，这个Presenter的类型就是BasePresenter<V>类型。构建Presenter之后会调用attachView函数与Activity建立关联。而在onDestroy函数中会与Activity解除关联，从而避免内存泄漏。那么，如果在onDestroy中解除了对Activity的引用那么就没有必要再用弱引用了，其实，并不是在任何情况下Activity的onDestroy方法都会被调用，一旦这种情况发生，弱引用也会保证不会造成内存泄漏。而通过BaseActivity的封装维护Presenter与View关联关系的代码，使得子类可以避免重复的代码。  
+`BaseActivity`含有两个泛型参数，第一个是`View`接口类型，第二个是`Presenter`的具体类型。通过泛型参数，会使得一些通用的逻辑可以被抽象到`BaseActivity`类中。例如，在`BaseActivity`的`onCreate`函数中，会通过`createPresenter`函数创建一个具体的`Presenter`，这个`Presenter`的类型就是`BasePresenter<V>`类型。构建`Presenter`之后会调用`attachView`函数与`Activity`建立关联。而在`onDestroy`函数中会与`Activity`解除关联，从而避免内存泄漏。那么，如果在`onDestroy`中解除了对`Activity`的引用那么就没有必要再用弱引用了，其实，并不是在任何情况下`Activity`的`onDestroy`方法都会被调用，一旦这种情况发生，弱引用也会保证不会造成内存泄漏。而通过`BaseActivity`的封装维护`Presenter`与`View`关联关系的代码，使得子类可以避免重复的代码。  
 
 例如PhotoInListFragment的代码实现如下：
 ```java
@@ -175,10 +175,11 @@ public class PhotoInListFragment extends BaseFragment<PhotoInfoContract.View<Pho
     }
 }
 ```
-此时，Presenter的创建以及与View建立关联等操作都被封装到BaseFragment中，清除了子类重复代码同时又避免了Fragment（View）内存泄漏问题。  
+此时，`Presenter`的创建以及与`View`建立关联等操作都被封装到`BaseFragment`中，清除了子类重复代码同时又避免了`Fragment`（`View`）内存泄漏问题。  
 
-基于此实例请参照Demo。
-如有问题请在Issues中提出，或者与我联系。
+基于此实例请参照`Demo`。
+如有问题请在`Issues`中提出，或者与我联系。
+
 <span id="参考">
 
 ### 参考
