@@ -2,14 +2,14 @@
 ### 一个自用解决内存泄漏问题的MVP模式框架  
 - - -
 ### 索引
--[Why](#Why)  
+- [Why](#Why)  
 
--[How](#How)  
+- [How](#How)  
 
--[参考书目](#参考)  
+- [参考书目](#参考)  
 
 - - - 
-<span id="Why">
+<span id="Why"/>
 
 ### Why
 `MVP`模式广泛运用于Android项目开发实战之中，具有易于维护、易于测试、松耦合、复用性高等特点，但是当`Presenter`进行一些耗时操作时，由于其持有了`View`的强引用，如果在耗时操作之前此`View`层被销毁会导致`Presenter`一直持有`View`对象而`View`对象无法收回，此时就发生了内存泄漏。  
@@ -60,7 +60,7 @@ public class BaseActivity extends AppCompatActivity {
 ```
 当然这个方法很蠢。
 
-<span id="How">
+<span id="How"/>
 
 ### How
 现在有一个全新的思路来解决这一问题。就是通过弱引用和`Activity`、`Fragment`的声明周期来解决这个问题。  
@@ -180,7 +180,7 @@ public class PhotoInListFragment extends BaseFragment<PhotoInfoContract.View<Pho
 基于此实例请参照`Demo`。
 如有问题请在`Issues`中提出，或者与我联系。
 
-<span id="参考">
+<span id="参考"/>
 
 ### 参考
 
